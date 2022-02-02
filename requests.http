@@ -1,0 +1,63 @@
+@manager-token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NDM2ODYwMzgsInBlcm1pc3Npb25zIjpbImxpc3QiLCJkZWxldGUiLCJub3RpZmllZCJdLCJ1c2VyX2lkIjoyfQ.91r8_6u2iFozKuR--B7geuVb1Ov8d_MmPLMBwjDXBaU
+@technician-token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NDM3NzQxNjgsInBlcm1pc3Npb25zIjpbImNyZWF0ZSIsInVwZGF0ZSIsImdldF9vbmUiLCJsaXN0X293bl90YXNrcyJdLCJ1c2VyX2lkIjoxfQ.8EPhP5jGHjjSudNCOHOOJ0CsDFNb_VMC45Qayjk0KaE
+@technician-token2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NDM2NTYxNjUsInBlcm1pc3Npb25zIjpbImNyZWF0ZSIsInVwZGF0ZSIsImdldF9vbmUiLCJsaXN0X293bl90YXNrcyJdLCJ1c2VyX2lkIjo0fQ.GZBNNgJRueMkU5Gq8CNV3_oBqG2QtyJlhSklhFoeuz0
+@manager-email = felipe.arado.pompeu@gmail.com
+@technician-email = felipecicatriz@gmail.com
+@technician-email2 = nick-tech@gmail.com
+@password = 123
+
+###
+POST http://localhost:8080/v1/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "{{technician-email}}",
+    "password": "{{password}}"
+}
+
+###
+POST http://localhost:8080/v1/users HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Ceci Techinician",
+    "email": "ceci-tech@gmail.com",
+    "password": "123",
+    "type": "Technician"
+}
+
+###
+POST http://localhost:8080/v1/tasks HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{technician-token}}
+
+{
+    "summary": "Test create summary 6"
+}
+
+###
+PUT http://localhost:8080/v1/tasks/32 HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{technician-token}}
+
+{
+  "id": 2,
+  "summary": "Test update summary 2",
+  "userId": 1
+}
+
+###
+GET http://localhost:8080/v1/tasks/44 HTTP/1.1
+Authorization: Bearer {{technician-token}}
+
+###
+GET http://localhost:8080/v1/user_tasks  HTTP/1.1
+Authorization: Bearer {{technician-token}}
+
+###
+GET http://localhost:8080/v1/tasks HTTP/1.1
+Authorization: Bearer {{manager-token}}
+
+###
+DELETE http://localhost:8080/v1/tasks/4 HTTP/1.1
+Authorization: Bearer {{manager-token}}

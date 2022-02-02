@@ -1,0 +1,57 @@
+version: '3.7'
+
+services:
+  app:
+    container_name: task-api
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - task-maintain-db
+    networks:
+      - tasks-maintain
+
+  task-maintain-db:
+    platform: linux/x86_64
+    image: mysql
+    container_name: task-db
+    ports: 
+      - 3306:3306
+    environment: 
+      - MYSQL_ROOT_HOST=${DB_HOST}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - database_mysql:/var/lib/mysql
+    networks:
+      - tasks-maintain
+
+  task-maintain-db-test:
+    platform: linux/x86_64
+    image: mysql
+    container_name: task-db-test
+    ports: 
+      - 3307:3306
+    environment: 
+      - MYSQL_ROOT_HOST=${TEST_DB_HOST}
+      - MYSQL_USER=${TEST_DB_USER}
+      - MYSQL_PASSWORD=${TEST_DB_PASSWORD}
+      - MYSQL_DATABASE=${TEST_DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${TEST_DB_PASSWORD}
+    volumes:
+      - database_mysql_test:/var/lib/mysql_test
+
+volumes:
+  api:
+  database_mysql:
+  database_mysql_test:
+
+networks:
+  tasks-maintain:
+    driver: bridge

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maintain-tasks-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maintain-tasks-api
+  template:
+    metadata:
+      labels:
+        app: maintain-tasks-api
+    spec:
+      containers:
+      - name: maintain-tasks-api
+        image: your-image
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - configMapRef:
+              name: env-map
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 15
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /readiness
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5
