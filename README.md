@@ -77,7 +77,7 @@ Well you can test the task maintain api with two ways as well no surprises I hop
         make test.integration
     
 
-1.  You can open the project in PyCharm or VSCode or the IDE your like but I know these two has support for test and configure their tests
+1.  You can open the project in Goland or VSCode or the IDE your like but I know these two has support for test and configure their tests
     1. [Golang on Goland](https://www.jetbrains.com/go/)
     1. [Golang on VSCode](https://code.visualstudio.com/docs/languages/go)
 
