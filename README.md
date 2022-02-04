@@ -64,7 +64,7 @@ You can run the task maintain api with two ways:
 #
 
 ## Test the API
-Well you can test the mutant api with two ways as well no surprises I hope:
+Well you can test the task maintain api with two ways as well no surprises I hope:
 
 1.  These are the commands you need and you see above
     
