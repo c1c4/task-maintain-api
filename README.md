@@ -35,7 +35,7 @@ You can run the task maintain api with two ways:
         make start.application
 
     This will put the api and database online.
-    You'll need to migrate the database to create the DNA table and Statistics table doing this:
+    You can use:
 
 
         docker ps
