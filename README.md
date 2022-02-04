@@ -59,7 +59,7 @@ You can run the task maintain api with two ways:
         
         docker-compose up -d task-maintain-db
 
-    To instantiate the Postgre or download and install in your local machine.
+    To instantiate the MySQL or download and install in your local machine.
 
 #
 
